@@ -1,0 +1,40 @@
+<head th:fragment="head">
+    <title>Prestamo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/menu.css" type="text/css">
+    <link rel="icon" href="/images/favicon.ico">
+</head>
+
+<header th:fragment="header">
+    <div><img class="logo" src="/images/logo.png"/>&nbsp</div>
+    <div>Banco Siglo XXI</div>
+</header>
+
+<nav th:fragment="nav" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <ul class="Menu">
+        <li><a href="/presentation/prestamos/list">Prestamos</a></li>
+        <th:block sec:authorize="hasAuthority('ADM')">
+            <li><a href="/presentation/prestamos/show">Crear</a></li>
+        </th:block>
+        <th:block sec:authorize="isAnonymous()">
+            <li><a href="/login">Login</a></li>
+        </th:block>
+        <th:block sec:authorize="isAuthenticated()">
+            <li>
+                <a href="#">&#128697;</a>
+<!--                <a href="#">&#128372;<span sec:authentication="name"></span></a>-->
+                <ul>
+                    <li>-- <span sec:authentication="name"></span> --</li>
+                    <li><a href="/presentation/perfil/show">Perfil</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </li>
+        </th:block>
+    </ul>
+</nav>
+
+<footer th:fragment="footer" class="centered">
+    <div>Gracias por su preferencia...</div>
+</footer>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{/presentation/fragments :: head}">
+<body>
+    <header th:replace="~{/presentation/fragments :: header}"></header>
+    <nav th:replace="~{/presentation/fragments :: nav}"></nav>
+    <main>
+        <div class="form w25">
+            <form action="/login" method="post">
+                    <div class="section"> &#128697; Login</div>
+                    <div><div class="label">Id</div>
+                        <div class="field"> <input type="text" id="username" name="username"/> </div>
+                    </div>
+                    <div>
+                        <div class="label">Clave</div>
+                        <div class="field"> <input type="password" id="password" name="password" required/> </div>
+                    </div>
+                    <div class="section"><input type="submit" name="login" value="Login" class="button"></div>
+            </form>
+        </div>
+        <div th:if="${param.error != null}" class="error">
+            <p>Credenciales incorrectas</p>
+        </div>
+    </main>
+    <footer th:replace="~{/presentation/fragments :: footer}"></footer>
+</body>
+</html>

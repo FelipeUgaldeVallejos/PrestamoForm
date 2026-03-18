@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{/presentation/fragments :: head}">
+<body>
+    <header th:replace="~{/presentation/fragments :: header}"></header>
+    <nav th:replace="~{/presentation/fragments :: nav}"></nav>
+    <div>
+        <h1>Prestamos</h1>
+        <a href="/presentation/prestamos/show" class="button">Crear</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th><th>Nombre</th><th>Monto</th><th>Tasa</th><th>Plazo</th><th>Cuota</th><th>Total</th><th>Acciones</th>
+                </tr>
+                <tr> <th colspan="1"></th> <th colspan="7"><form method="POST" action="/presentation/prestamos/search" th:object="${prestamosSearch}"><input type="text" th:field="*{nombre}"><input type="submit" name="buscar" value="Buscar" class="button"></form></th> </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p : ${prestamosList}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.nombre}"></td>
+                <td th:text="${#numbers.formatDecimal(p.monto,3,'POINT',0,'COMMA')}"></td>
+                <td th:text="${p.tasa}"></td>
+                <td th:text="${p.plazo}"></td>
+                <td th:text="${#numbers.formatDecimal(p.cuota,3,'POINT',0,'COMMA')}"></td>
+                <td th:text="${#numbers.formatDecimal(p.total,3,'POINT',0,'COMMA')}"></td>
+                <td>
+                    <a th:href="@{/presentation/prestamos/edit/{id}(id=${p.id})}">Editar</a>
+                    <a th:href="@{/presentation/prestamos/delete/{id}(id=${p.id})}" class="delete">Borrar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer th:replace="~{/presentation/fragments :: footer}"></footer>
+</body>
+</html>

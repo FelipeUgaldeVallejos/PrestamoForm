@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="~{/presentation/fragments :: head}">
+<body>
+    <header th:replace="~{/presentation/fragments :: header}"></header>
+    <nav th:replace="~{/presentation/fragments :: nav}"></nav>
+    <main>
+        <div class="form w50">
+        <form method="POST" name="prestamo" th:object="${prestamo}"
+              th:action="@{${editing? '/presentation/prestamos/update' :
+               '/presentation/prestamos/create'}}" >
+
+                <div class="section"> Datos del cliente</div>
+                <div>
+                    <div class="label">Id</div>
+                    <div class="field">
+                        <select th:field="*{tipo}">
+                            <option value="1" selected>Cédula</option>
+                            <option value="2">Dimex</option>
+                        </select>
+                        <input type="text" th:field="*{id}"
+                               th:readonly="${editing}">
+                        <span th:if="${#fields.hasErrors('id')}" th:text="${#fields.errors('id')}" class="error"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Nombre</div>
+                    <div class="field">
+                        <input type="text" th:field="*{nombre}">
+                        <span th:if="${#fields.hasErrors('nombre')}" th:text="${#fields.errors('nombre')}" class="error"></span>
+                    </div>
+                </div>
+                <div class="section"> Datos del Préstamo</div>
+                <div>
+                    <div class="label">Monto</div>
+                    <div class="field">
+                        <input type="text" th:field="*{monto}" size=15>
+                        <span th:if="${#fields.hasErrors('monto')}" th:text="${#fields.errors('monto')}" class="error"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Tipo</div>
+                    <div class="field">
+                        <input type="radio" th:field="*{tasa}" value="1" checked> <img src="/images/casa.png">
+                        <input type="radio" th:field="*{tasa}" value="2"> <img src="/images/auto.png">
+                        <span th:if="${#fields.hasErrors('tasa')}" th:text="${#fields.errors('tasa')}" class="error"></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="label">Plazo</div>
+                    <div class="field">
+                        <select th:field="*{plazo}">
+                            <option value="12" selected>Un año (12 meses)</option>
+                            <option value="60">Cinco años (60 meses)</option>
+                            <option value="120">Diez años (120 meses)</option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('plazo')}" th:text="${#fields.errors('plazo')}" class="error"></span>
+                    </div>
+                </div>
+                <div class="section"><input type="submit" name="aplicar" value="Aplicar" class="button"></div>
+        </form>
+        </div>
+        <a href="/presentation/prestamos/list" class="button">Regresar</a>
+    </main>
+    <footer th:replace="~{/presentation/fragments :: footer}"></footer>
+</body>
+</html>
